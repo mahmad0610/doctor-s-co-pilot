@@ -12,7 +12,13 @@ import {
   Phone,
   Archive,
   LogOut,
-  User as UserIcon
+  User as UserIcon,
+  Calendar,
+  BarChart3,
+  MessageSquare,
+  AlertCircle,
+  FileText,
+  Settings as SettingsIcon
 } from 'lucide-react';
 import { mockPatients } from '@/lib/mockData';
 import { PatientListSkeleton } from '@/components/LoadingSkeleton';
@@ -74,6 +80,37 @@ export default function PatientList() {
       </header>
 
       <div className="container mx-auto px-6 py-8">
+        {/* Navigation Menu */}
+        <div className="mb-6 flex gap-2 overflow-x-auto pb-2">
+          <Button variant="default" onClick={() => navigate('/patients')}>
+            Patients
+          </Button>
+          <Button variant="outline" onClick={() => navigate('/scheduling')}>
+            <Calendar className="mr-2 h-4 w-4" />
+            Scheduling
+          </Button>
+          <Button variant="outline" onClick={() => navigate('/analytics')}>
+            <BarChart3 className="mr-2 h-4 w-4" />
+            Analytics
+          </Button>
+          <Button variant="outline" onClick={() => navigate('/messages')}>
+            <MessageSquare className="mr-2 h-4 w-4" />
+            Messages
+          </Button>
+          <Button variant="outline" onClick={() => navigate('/alerts')}>
+            <AlertCircle className="mr-2 h-4 w-4" />
+            Alerts
+          </Button>
+          <Button variant="outline" onClick={() => navigate('/audit')}>
+            <FileText className="mr-2 h-4 w-4" />
+            Audit Log
+          </Button>
+          <Button variant="outline" onClick={() => navigate('/settings')}>
+            <SettingsIcon className="mr-2 h-4 w-4" />
+            Settings
+          </Button>
+        </div>
+
         {/* Search and Filters */}
         <div className="mb-6 space-y-4">
           <div className="relative">
