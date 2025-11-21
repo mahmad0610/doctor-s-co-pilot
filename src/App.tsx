@@ -9,7 +9,14 @@ import Login from "./pages/Login";
 import PatientList from "./pages/PatientList";
 import PatientDetail from "./pages/PatientDetail";
 import CarePlanEditor from "./pages/CarePlanEditor";
+import SchedulingHub from "./pages/SchedulingHub";
+import AnalyticsDashboard from "./pages/AnalyticsDashboard";
+import MessagingCenter from "./pages/MessagingCenter";
+import AIAlertTriage from "./pages/AIAlertTriage";
+import AuditTimeline from "./pages/AuditTimeline";
+import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
+import Index from "./pages/Index";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +29,7 @@ const App = () => (
         <AuthProvider>
           <Routes>
             <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Index />} />
             <Route
               path="/patients"
               element={
@@ -46,7 +54,54 @@ const App = () => (
                 </ProtectedRoute>
               }
             />
-            <Route path="/" element={<Navigate to="/login" replace />} />
+            <Route
+              path="/scheduling"
+              element={
+                <ProtectedRoute>
+                  <SchedulingHub />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/analytics"
+              element={
+                <ProtectedRoute>
+                  <AnalyticsDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/messages"
+              element={
+                <ProtectedRoute>
+                  <MessagingCenter />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/alerts"
+              element={
+                <ProtectedRoute>
+                  <AIAlertTriage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/audit"
+              element={
+                <ProtectedRoute>
+                  <AuditTimeline />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/settings"
+              element={
+                <ProtectedRoute>
+                  <Settings />
+                </ProtectedRoute>
+              }
+            />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>
