@@ -29,19 +29,7 @@ export default function SchedulingHub() {
   const timeSlots = Array.from({ length: 10 }, (_, i) => `${9 + i}:00`);
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="border-b bg-card">
-        <div className="container mx-auto px-4 py-4">
-          <Button variant="ghost" onClick={() => navigate('/patients')} className="mb-2">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Patients
-          </Button>
-          <h1 className="text-3xl font-bold">Scheduling Hub</h1>
-          <p className="text-muted-foreground">Drag patients to available time slots</p>
-        </div>
-      </div>
-
-      <div className="container mx-auto px-4 py-6">
+    <div className="container mx-auto px-4 py-6">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           <div className="lg:col-span-1 space-y-4">
             <Card>
@@ -128,7 +116,6 @@ export default function SchedulingHub() {
             </Card>
           </div>
         </div>
-      </div>
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
+import DashboardLayout from "@/components/DashboardLayout";
 import Login from "./pages/Login";
 import PatientList from "./pages/PatientList";
 import PatientDetail from "./pages/PatientDetail";
@@ -34,7 +35,9 @@ const App = () => (
               path="/patients"
               element={
                 <ProtectedRoute>
-                  <PatientList />
+                  <DashboardLayout>
+                    <PatientList />
+                  </DashboardLayout>
                 </ProtectedRoute>
               }
             />
@@ -42,7 +45,9 @@ const App = () => (
               path="/patients/:id"
               element={
                 <ProtectedRoute>
-                  <PatientDetail />
+                  <DashboardLayout>
+                    <PatientDetail />
+                  </DashboardLayout>
                 </ProtectedRoute>
               }
             />
@@ -50,7 +55,9 @@ const App = () => (
               path="/patients/:id/care-plan"
               element={
                 <ProtectedRoute>
-                  <CarePlanEditor />
+                  <DashboardLayout>
+                    <CarePlanEditor />
+                  </DashboardLayout>
                 </ProtectedRoute>
               }
             />
@@ -58,7 +65,9 @@ const App = () => (
               path="/scheduling"
               element={
                 <ProtectedRoute>
-                  <SchedulingHub />
+                  <DashboardLayout>
+                    <SchedulingHub />
+                  </DashboardLayout>
                 </ProtectedRoute>
               }
             />
@@ -66,7 +75,9 @@ const App = () => (
               path="/analytics"
               element={
                 <ProtectedRoute>
-                  <AnalyticsDashboard />
+                  <DashboardLayout>
+                    <AnalyticsDashboard />
+                  </DashboardLayout>
                 </ProtectedRoute>
               }
             />
@@ -74,7 +85,9 @@ const App = () => (
               path="/messages"
               element={
                 <ProtectedRoute>
-                  <MessagingCenter />
+                  <DashboardLayout>
+                    <MessagingCenter />
+                  </DashboardLayout>
                 </ProtectedRoute>
               }
             />
@@ -82,7 +95,9 @@ const App = () => (
               path="/alerts"
               element={
                 <ProtectedRoute>
-                  <AIAlertTriage />
+                  <DashboardLayout>
+                    <AIAlertTriage />
+                  </DashboardLayout>
                 </ProtectedRoute>
               }
             />
@@ -90,7 +105,9 @@ const App = () => (
               path="/audit"
               element={
                 <ProtectedRoute>
-                  <AuditTimeline />
+                  <DashboardLayout>
+                    <AuditTimeline />
+                  </DashboardLayout>
                 </ProtectedRoute>
               }
             />
@@ -98,7 +115,9 @@ const App = () => (
               path="/settings"
               element={
                 <ProtectedRoute>
-                  <Settings />
+                  <DashboardLayout>
+                    <Settings />
+                  </DashboardLayout>
                 </ProtectedRoute>
               }
             />

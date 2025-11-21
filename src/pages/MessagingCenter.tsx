@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { ArrowLeft, Send, Sparkles } from 'lucide-react';
+import { Send, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { mockPatients, mockMessages } from '@/lib/mockData';
 import { format } from 'date-fns';
@@ -30,13 +30,9 @@ export default function MessagingCenter() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="flex flex-col h-full">
       <div className="border-b bg-card">
-        <div className="container mx-auto px-4 py-4">
-          <Button variant="ghost" onClick={() => navigate('/patients')} className="mb-2">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Patients
-          </Button>
+        <div className="container mx-auto px-4 py-6">
           <h1 className="text-3xl font-bold">Messaging Center</h1>
           <p className="text-muted-foreground">Patient communications with AI assistance</p>
         </div>

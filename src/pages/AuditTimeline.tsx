@@ -94,19 +94,7 @@ export default function AuditTimeline() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="border-b bg-card">
-        <div className="container mx-auto px-4 py-4">
-          <Button variant="ghost" onClick={() => navigate('/patients')} className="mb-2">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Patients
-          </Button>
-          <h1 className="text-3xl font-bold">Audit & Timeline View</h1>
-          <p className="text-muted-foreground">Complete log of all actions and AI outputs</p>
-        </div>
-      </div>
-
-      <div className="container mx-auto px-4 py-6">
+    <div className="container mx-auto px-4 py-6">
         <Card className="mb-6">
           <CardHeader>
             <CardTitle>Filters</CardTitle>
@@ -180,7 +168,6 @@ export default function AuditTimeline() {
             </Card>
           ))}
         </div>
-      </div>
     </div>
   );
 }
