@@ -37,7 +37,7 @@ export default function PatientDetail() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background p-6">
+      <div className="p-6">
         <PatientDetailSkeleton />
       </div>
     );
@@ -45,7 +45,7 @@ export default function PatientDetail() {
 
   if (!patient) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="flex items-center justify-center h-96">
         <div className="text-center">
           <h2 className="text-2xl font-bold mb-2">Patient not found</h2>
           <Button onClick={() => navigate('/patients')}>Back to list</Button>
@@ -61,34 +61,27 @@ export default function PatientDetail() {
   }));
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b bg-card sticky top-0 z-10">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon" onClick={() => navigate('/patients')}>
-                <ArrowLeft className="h-5 w-5" />
-              </Button>
-              <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
-                <UserIcon className="h-6 w-6 text-primary" />
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold">{patient.name}</h1>
-                <p className="text-sm text-muted-foreground">
-                  {patient.age} years • {patient.gender}
-                </p>
-              </div>
-            </div>
-            <Button onClick={() => navigate(`/patients/${id}/care-plan`)}>
-              <Edit className="h-4 w-4 mr-2" />
-              Edit Care Plan
-            </Button>
+    <div className="container mx-auto px-6 py-8">
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-4">
+          <Button variant="ghost" size="icon" onClick={() => navigate('/patients')}>
+            <ArrowLeft className="h-5 w-5" />
+          </Button>
+          <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
+            <UserIcon className="h-6 w-6 text-primary" />
+          </div>
+          <div>
+            <h1 className="text-2xl font-bold">{patient.name}</h1>
+            <p className="text-sm text-muted-foreground">
+              {patient.age} years • {patient.gender}
+            </p>
           </div>
         </div>
-      </header>
-
-      <div className="container mx-auto px-6 py-8">
+        <Button onClick={() => navigate(`/patients/${id}/care-plan`)}>
+          <Edit className="h-4 w-4 mr-2" />
+          Edit Care Plan
+        </Button>
+      </div>
         {/* Vitals Cards - Bento Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
           <Card>
@@ -320,7 +313,6 @@ export default function PatientDetail() {
             </Card>
           </TabsContent>
         </Tabs>
-      </div>
     </div>
   );
 }

@@ -6,23 +6,14 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { 
   Search, 
-  Bell, 
   Heart, 
   Activity, 
   Phone,
   Archive,
-  LogOut,
-  User as UserIcon,
-  Calendar,
-  BarChart3,
-  MessageSquare,
-  AlertCircle,
-  FileText,
-  Settings as SettingsIcon
+  User as UserIcon
 } from 'lucide-react';
 import { mockPatients } from '@/lib/mockData';
 import { PatientListSkeleton } from '@/components/LoadingSkeleton';
-import { useAuth } from '@/contexts/AuthContext';
 import { PatientStatus } from '@/types';
 import { format } from 'date-fns';
 
@@ -31,7 +22,6 @@ export default function PatientList() {
   const [statusFilter, setStatusFilter] = useState<PatientStatus | 'all'>('all');
   const [loading] = useState(false);
   const navigate = useNavigate();
-  const { user, signOut } = useAuth();
 
   const filteredPatients = mockPatients.filter(patient => {
     const matchesSearch = patient.name.toLowerCase().includes(search.toLowerCase());
@@ -48,68 +38,14 @@ export default function PatientList() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background p-6">
+      <div className="p-6">
         <PatientListSkeleton />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b bg-card sticky top-0 z-10">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-bold">Patient Command Center</h1>
-              <p className="text-sm text-muted-foreground">Welcome back, Dr. {user?.displayName}</p>
-            </div>
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon" className="relative">
-                <Bell className="h-5 w-5" />
-                <span className="absolute -top-1 -right-1 h-4 w-4 bg-destructive rounded-full text-[10px] flex items-center justify-center text-destructive-foreground">
-                  3
-                </span>
-              </Button>
-              <Button variant="ghost" size="icon" onClick={signOut}>
-                <LogOut className="h-5 w-5" />
-              </Button>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <div className="container mx-auto px-6 py-8">
-        {/* Navigation Menu */}
-        <div className="mb-6 flex gap-2 overflow-x-auto pb-2">
-          <Button variant="default" onClick={() => navigate('/patients')}>
-            Patients
-          </Button>
-          <Button variant="outline" onClick={() => navigate('/scheduling')}>
-            <Calendar className="mr-2 h-4 w-4" />
-            Scheduling
-          </Button>
-          <Button variant="outline" onClick={() => navigate('/analytics')}>
-            <BarChart3 className="mr-2 h-4 w-4" />
-            Analytics
-          </Button>
-          <Button variant="outline" onClick={() => navigate('/messages')}>
-            <MessageSquare className="mr-2 h-4 w-4" />
-            Messages
-          </Button>
-          <Button variant="outline" onClick={() => navigate('/alerts')}>
-            <AlertCircle className="mr-2 h-4 w-4" />
-            Alerts
-          </Button>
-          <Button variant="outline" onClick={() => navigate('/audit')}>
-            <FileText className="mr-2 h-4 w-4" />
-            Audit Log
-          </Button>
-          <Button variant="outline" onClick={() => navigate('/settings')}>
-            <SettingsIcon className="mr-2 h-4 w-4" />
-            Settings
-          </Button>
-        </div>
+    <div className="container mx-auto px-6 py-8">
 
         {/* Search and Filters */}
         <div className="mb-6 space-y-4">
@@ -238,7 +174,6 @@ export default function PatientList() {
             <p className="text-muted-foreground">No patients found</p>
           </div>
         )}
-      </div>
     </div>
   );
 }

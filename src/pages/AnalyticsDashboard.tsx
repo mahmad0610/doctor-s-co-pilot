@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, TrendingUp, Users, Calendar, Activity } from 'lucide-react';
+import { TrendingUp, Users, Calendar, Activity } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { mockVitalsTimeline } from '@/lib/mockData';
@@ -35,13 +35,9 @@ export default function AnalyticsDashboard() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="flex flex-col h-full">
       <div className="border-b bg-card">
-        <div className="container mx-auto px-4 py-4">
-          <Button variant="ghost" onClick={() => navigate('/patients')} className="mb-2">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Patients
-          </Button>
+        <div className="container mx-auto px-4 py-6">
           <h1 className="text-3xl font-bold">Analytics Dashboard</h1>
           <p className="text-muted-foreground">Practice insights and patient trends</p>
         </div>

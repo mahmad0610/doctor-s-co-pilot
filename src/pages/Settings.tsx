@@ -41,19 +41,7 @@ export default function Settings() {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="border-b bg-card">
-        <div className="container mx-auto px-4 py-4">
-          <Button variant="ghost" onClick={() => navigate('/patients')} className="mb-2">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Patients
-          </Button>
-          <h1 className="text-3xl font-bold">Settings & Integrations</h1>
-          <p className="text-muted-foreground">Manage your preferences and external connections</p>
-        </div>
-      </div>
-
-      <div className="container mx-auto px-4 py-6 max-w-4xl space-y-6">
+    <div className="container mx-auto px-4 py-6 max-w-4xl space-y-6">
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -166,10 +154,9 @@ export default function Settings() {
           </CardContent>
         </Card>
 
-        <Button onClick={handleSaveSettings} className="w-full">
-          Save Settings
-        </Button>
-      </div>
+      <Button onClick={handleSaveSettings} className="w-full">
+        Save Settings
+      </Button>
     </div>
   );
 }

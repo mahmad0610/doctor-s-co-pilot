@@ -43,19 +43,7 @@ export default function AIAlertTriage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="border-b bg-card">
-        <div className="container mx-auto px-4 py-4">
-          <Button variant="ghost" onClick={() => navigate('/patients')} className="mb-2">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Patients
-          </Button>
-          <h1 className="text-3xl font-bold">AI Alert Triage</h1>
-          <p className="text-muted-foreground">Review and action AI-generated recommendations</p>
-        </div>
-      </div>
-
-      <div className="container mx-auto px-4 py-6">
+    <div className="container mx-auto px-4 py-6">
         <div className="grid gap-4">
           {alerts.map((alert) => (
             <Card 
@@ -129,7 +117,6 @@ export default function AIAlertTriage() {
             </Card>
           ))}
         </div>
-      </div>
     </div>
   );
 }

@@ -41,7 +41,7 @@ export default function CarePlanEditor() {
 
   if (!patient || !carePlan) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="flex items-center justify-center h-96">
         <div className="text-center">
           <h2 className="text-2xl font-bold mb-2">Care plan not found</h2>
           <Button onClick={() => navigate('/patients')}>Back to list</Button>
@@ -89,39 +89,32 @@ export default function CarePlanEditor() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b bg-card sticky top-0 z-10">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon" onClick={() => navigate(`/patients/${id}`)}>
-                <ArrowLeft className="h-5 w-5" />
-              </Button>
-              <div>
-                <h1 className="text-2xl font-bold">Care Plan Editor</h1>
-                <p className="text-sm text-muted-foreground">{patient.name}</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <Button variant="outline" onClick={() => navigate(`/patients/${id}`)}>
-                <Eye className="h-4 w-4 mr-2" />
-                Preview
-              </Button>
-              <Button 
-                onClick={() => setShowSignModal(true)}
-                disabled={hasSevereInteractions}
-                className="gap-2"
-              >
-                <Save className="h-4 w-4" />
-                Sign & Approve
-              </Button>
-            </div>
+    <div className="container mx-auto px-6 py-8 max-w-4xl">
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-4">
+          <Button variant="ghost" size="icon" onClick={() => navigate(`/patients/${id}`)}>
+            <ArrowLeft className="h-5 w-5" />
+          </Button>
+          <div>
+            <h1 className="text-2xl font-bold">Care Plan Editor</h1>
+            <p className="text-sm text-muted-foreground">{patient.name}</p>
           </div>
         </div>
-      </header>
-
-      <div className="container mx-auto px-6 py-8 max-w-4xl">
+        <div className="flex items-center gap-2">
+          <Button variant="outline" onClick={() => navigate(`/patients/${id}`)}>
+            <Eye className="h-4 w-4 mr-2" />
+            Preview
+          </Button>
+          <Button 
+            onClick={() => setShowSignModal(true)}
+            disabled={hasSevereInteractions}
+            className="gap-2"
+          >
+            <Save className="h-4 w-4" />
+            Sign & Approve
+          </Button>
+        </div>
+      </div>
         {/* Confidence Warning */}
         {carePlan.confidence < 60 && (
           <div className="mb-6 p-4 bg-destructive/10 border-2 border-destructive rounded-lg">
@@ -246,7 +239,6 @@ export default function CarePlanEditor() {
           <kbd className="px-2 py-1 bg-background rounded border">Cmd</kbd> +{' '}
           <kbd className="px-2 py-1 bg-background rounded border">Enter</kbd> to sign
         </div>
-      </div>
 
       {/* Sign & Override Modal */}
       <Dialog open={showSignModal} onOpenChange={setShowSignModal}>
