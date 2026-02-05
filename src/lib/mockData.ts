@@ -3,11 +3,22 @@ import {
   AITriageBrief, 
   CarePlan, 
   AIRecommendation, 
-  Appointment,
   Message,
   VitalsTimeline
 } from '@/types';
 import { addDays, subDays } from 'date-fns';
+
+// Legacy appointment type for mock data (UI display)
+export interface LegacyAppointment {
+  id: string;
+  patientId: string;
+  patientName: string;
+  start: Date;
+  end: Date;
+  type: 'consultation' | 'follow-up' | 'emergency';
+  status: 'scheduled' | 'completed' | 'cancelled';
+  notes?: string;
+}
 
 export const mockPatients: Patient[] = [
   {
@@ -190,7 +201,7 @@ export const mockRecommendations: AIRecommendation[] = [
   },
 ];
 
-export const mockAppointments: Appointment[] = [
+export const mockAppointments: LegacyAppointment[] = [
   {
     id: 'appt-1',
     patientId: '1',

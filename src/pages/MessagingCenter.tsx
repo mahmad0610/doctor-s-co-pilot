@@ -4,22 +4,39 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Send, Sparkles } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Send, Sparkles, Loader2 } from 'lucide-react';
 import { mockPatients, mockMessages } from '@/lib/mockData';
 import { format } from 'date-fns';
 import { toast } from 'sonner';
 import { AILabel } from '@/components/AILabel';
+import { useChat } from '@/hooks/api/useChat';
+import { useUserStore } from '@/stores/userStore';
 
 export default function MessagingCenter() {
-  const navigate = useNavigate();
   const [selectedPatient, setSelectedPatient] = useState(mockPatients[0]);
   const [messageInput, setMessageInput] = useState('');
+  
+  const { patientId, setMockPatientId } = useUserStore();
+  
+  // Auto-set mock patient ID for chat
+  if (!patientId) {
+    setMockPatientId();
+  }
+
+  // Use the chat hook for AI-powered responses
+  const { messages: chatMessages, sendMessage, isLoading: chatLoading } = useChat({
+    patientId: patientId || 'default',
+    onSuccess: () => {
+      toast.success('AI response received');
+    }
+  });
+
   const patientMessages = mockMessages.filter(m => m.patientId === selectedPatient.id);
 
   const handleSendMessage = () => {
     if (messageInput.trim()) {
-      toast.success('Message sent');
+      // Send to AI chat agent
+      sendMessage(messageInput);
       setMessageInput('');
     }
   };
@@ -94,6 +111,7 @@ export default function MessagingCenter() {
 
               <ScrollArea className="flex-1 p-4">
                 <div className="space-y-4">
+                  {/* Mock patient messages */}
                   {patientMessages.map(message => (
                     <div key={message.id} className="space-y-2">
                       <div className="flex gap-3">
@@ -130,6 +148,43 @@ export default function MessagingCenter() {
                       )}
                     </div>
                   ))}
+
+                  {/* AI Chat messages */}
+                  {chatMessages.map((msg, idx) => (
+                    <div key={idx} className="flex gap-3">
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                        msg.role === 'user' ? 'bg-primary/10' : 'bg-emerald-100'
+                      }`}>
+                        <span className="text-xs font-medium">
+                          {msg.role === 'user' ? 'Y' : 'AI'}
+                        </span>
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="font-medium text-sm">
+                            {msg.role === 'user' ? 'You' : 'AI Assistant'}
+                          </span>
+                          {msg.role === 'assistant' && <AILabel />}
+                        </div>
+                        <div className={`p-3 rounded-lg ${
+                          msg.role === 'user' ? 'bg-primary text-primary-foreground' : 'bg-accent'
+                        }`}>
+                          {msg.content}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+
+                  {chatLoading && (
+                    <div className="flex gap-3">
+                      <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center">
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                      </div>
+                      <div className="bg-accent p-3 rounded-lg">
+                        <span className="text-sm text-muted-foreground">AI is typing...</span>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </ScrollArea>
 
@@ -140,9 +195,14 @@ export default function MessagingCenter() {
                     value={messageInput}
                     onChange={(e) => setMessageInput(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                    disabled={chatLoading}
                   />
-                  <Button onClick={handleSendMessage}>
-                    <Send className="h-4 w-4" />
+                  <Button onClick={handleSendMessage} disabled={chatLoading}>
+                    {chatLoading ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      <Send className="h-4 w-4" />
+                    )}
                   </Button>
                 </div>
               </CardContent>

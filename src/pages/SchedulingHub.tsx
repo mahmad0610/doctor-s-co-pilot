@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Calendar as CalendarIcon, Clock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { mockPatients, mockAppointments } from '@/lib/mockData';
+import { mockPatients, mockAppointments, LegacyAppointment } from '@/lib/mockData';
 import { format } from 'date-fns';
 import { toast } from 'sonner';
 

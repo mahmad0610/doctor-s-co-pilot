@@ -6,7 +6,18 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import DashboardLayout from "@/components/DashboardLayout";
+
+// Public pages
+import Landing from "./pages/Landing";
 import Login from "./pages/Login";
+import DoctorSearch from "./pages/DoctorSearch";
+import DoctorProfile from "./pages/DoctorProfile";
+
+// Patient pages
+import PatientAppointments from "./pages/PatientAppointments";
+import TriageWizard from "./pages/TriageWizard";
+
+// Clinician pages
 import PatientList from "./pages/PatientList";
 import PatientDetail from "./pages/PatientDetail";
 import CarePlanEditor from "./pages/CarePlanEditor";
@@ -17,7 +28,6 @@ import AIAlertTriage from "./pages/AIAlertTriage";
 import AuditTimeline from "./pages/AuditTimeline";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
-import Index from "./pages/Index";
 
 const queryClient = new QueryClient();
 
@@ -30,7 +40,15 @@ const App = () => (
         <AuthProvider>
           <Routes>
             <Route path="/login" element={<Login />} />
-            <Route path="/" element={<Index />} />
+            <Route path="/" element={<Landing />} />
+            
+            {/* Patient-facing routes */}
+            <Route path="/doctors/search" element={<DoctorSearch />} />
+            <Route path="/doctors/:id" element={<DoctorProfile />} />
+            <Route path="/my-appointments" element={<PatientAppointments />} />
+            <Route path="/appointments/:id/triage" element={<TriageWizard />} />
+            
+            {/* Clinician dashboard routes */}
             <Route
               path="/patients"
               element={
