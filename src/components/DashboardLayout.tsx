@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '@/contexts/AuthContext';
+import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -36,6 +35,7 @@ import {
   Bell,
   LogOut,
   Activity,
+  Home,
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 
@@ -104,13 +104,7 @@ interface DashboardLayoutProps {
 }
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
-  const { user, signOut } = useAuth();
   const navigate = useNavigate();
-
-  const handleLogout = async () => {
-    await signOut();
-    navigate('/login');
-  };
 
   return (
     <SidebarProvider>
@@ -124,6 +118,13 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
               <SidebarTrigger className="text-muted-foreground hover:text-foreground" />
               
               <div className="flex-1" />
+
+              <Link to="/">
+                <Button variant="ghost" size="sm" className="gap-1.5">
+                  <Home className="h-4 w-4" />
+                  Home
+                </Button>
+              </Link>
               
               <Button variant="ghost" size="icon" className="relative">
                 <Bell className="h-5 w-5" />
@@ -134,18 +135,13 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" className="gap-2">
                     <Avatar className="h-8 w-8">
-                      <AvatarImage src={user?.photoURL || undefined} />
                       <AvatarFallback className="bg-primary text-primary-foreground">
-                        {user?.displayName?.[0] || user?.email?.[0] || 'D'}
+                        D
                       </AvatarFallback>
                     </Avatar>
                     <div className="hidden md:flex flex-col items-start text-sm">
-                      <span className="font-medium">
-                        {user?.displayName || 'Doctor'}
-                      </span>
-                      <span className="text-xs text-muted-foreground">
-                        {user?.email}
-                      </span>
+                      <span className="font-medium">Demo Doctor</span>
+                      <span className="text-xs text-muted-foreground">Clinician</span>
                     </div>
                   </Button>
                 </DropdownMenuTrigger>
@@ -157,9 +153,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                     Settings
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={handleLogout} className="text-destructive">
+                  <DropdownMenuItem onClick={() => navigate('/')} className="text-destructive">
                     <LogOut className="mr-2 h-4 w-4" />
-                    Logout
+                    Exit Dashboard
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -177,18 +173,14 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
               <div className="flex items-center gap-4">
                 <span>© 2024 Sehatly</span>
                 <span>•</span>
-                <a href="#" className="hover:text-foreground transition-colors">
-                  Privacy
-                </a>
+                <a href="#" className="hover:text-foreground transition-colors">Privacy</a>
                 <span>•</span>
-                <a href="#" className="hover:text-foreground transition-colors">
-                  Terms
-                </a>
+                <a href="#" className="hover:text-foreground transition-colors">Terms</a>
               </div>
               <div className="flex items-center gap-2">
                 <span className="hidden sm:inline">System Status:</span>
-                <span className="flex items-center gap-1 text-emerald-600">
-                  <span className="h-2 w-2 rounded-full bg-emerald-600 animate-pulse" />
+                <span className="flex items-center gap-1 text-primary">
+                  <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
                   Operational
                 </span>
               </div>
